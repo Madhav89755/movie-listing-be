@@ -21,6 +21,12 @@ class CollectionMovies(DateTime):
 
     def __str__(self) -> str:
         return self.movie_title.title()
+    
+    @property
+    def get_genres(self):
+        if self.genres:
+            return self.genres.split(",")
+        return None
 
     class Meta:
         verbose_name = "Collection Movie"
