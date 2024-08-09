@@ -1,10 +1,11 @@
+import pandas as pd
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from utils.logging import unknown_exception_logger
-from .models import Collection
-from .serializers import CreateCollectionSerializer, CollectionSerializer
-from .fetch import fetch_collection_data, fetch_collection_details
+from collection.models import Collection
+from collection.serializers import CreateCollectionSerializer, CollectionSerializer
+from collection.fetch import fetch_collection_data, fetch_collection_details
 from movies.serializers import CreateMovieSerializer
 # Create your views here.
 
@@ -70,12 +71,12 @@ class CollectionManagementView(APIView):
             serializer_obj = CollectionSerializer(
                 instance=collection_obj, data=data, partial=True)
             serializer_obj.is_valid(raise_exception=True)
-            serializer_obj.save()
+            collection_obj=serializer_obj.save()
 
-            eligible_movies=[]
             if movie_data:
-                for movie in movie_data:
-                    movie['collection']=collection_uuid
+                df=pd.DataFrame(movie_data)
+                df['collection']=collection_uuid
+                movie_data=df.to_dict(orient="records")
 
                 movie_data=CreateMovieSerializer(data=movie_data, many=True)
                 movie_data.is_valid(raise_exception=True)
