@@ -1,9 +1,21 @@
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework.status import HTTP_400_BAD_REQUEST
-# Create your views here.
+from django.contrib.auth.models import User
+
+from .serializers import UserRegistrationSerializer
 from .fetch import fetch_movies
 
+# Create your views here.
+
+
+
+class UserRegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = UserRegistrationSerializer
 
 class GetMoviesAPI(APIView):
     def get(self, request):
