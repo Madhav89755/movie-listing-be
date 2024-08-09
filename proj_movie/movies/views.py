@@ -23,7 +23,8 @@ class UserRegisterView(generics.CreateAPIView):
     @swagger_auto_schema(
         operation_description="Register a user onto the platform to perform operations.",
         operation_id="Register User",
-        tags=["Accounts"]
+        tags=["Accounts"],
+        security=[],
     )
     def post(self, request, *args, **kwargs):
         try:
