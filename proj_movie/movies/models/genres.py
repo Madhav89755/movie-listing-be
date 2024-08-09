@@ -19,6 +19,14 @@ class Genres(DateTime):
 
     def __str__(self) -> str:
         return f"{self.user.id} - {self.genre}"
+    
+    def increase_count(self):
+        self.movie_count+=1
+        self.save()
+
+    def decrease_count(self):
+        self.movie_count-=1
+        self.save()
 
     class Meta:
         verbose_name = "Genre"
