@@ -25,6 +25,8 @@ def fetch_movies(page: int = None, retry_limit: int = 3) -> tuple[bool | int, st
             resp = requests.get(
                 f"{url}", headers=headers, verify=False)
             response=(resp.status_code, resp.json())
+            if resp.status_code ==200:
+                break
         except Exception as e:
             unknown_exception_logger(e)
             response=(404, API_RETRY_MAX_LIMIT_REACHED)
