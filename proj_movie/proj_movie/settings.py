@@ -174,9 +174,8 @@ API_PASSWORD=config("MOVIE_API_PASSWORD")
 
 # Swagger Configurations
 SWAGGER_SETTINGS = {
-
     'SECURITY_DEFINITIONS': {
-        'Bearer': {
+        'JWT': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
@@ -185,5 +184,6 @@ SWAGGER_SETTINGS = {
     'LOGIN_URL': 'login/',
     'DEFAULT_MODEL_DEPTH': -1,
     'TAGS_SORTER':'alpha',
-    'OPERATIONS_SORTER':'alpha'
+    'OPERATIONS_SORTER':'alpha',
+    'DEEP_LINKING': True
 }
