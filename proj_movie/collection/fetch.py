@@ -16,7 +16,6 @@ def fetch_collection_data(user_id:int, include_movies:bool=False)->dict:
         genre_obj=Genres.objects.filter(user_id=user_id)
         genre_data=genre_obj[:3].values_list("genre", flat=True)
 
-        print(data_serialized)
         if not include_movies:
             [elements.pop("movies") for elements in data_serialized]
 
