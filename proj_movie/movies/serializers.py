@@ -62,12 +62,12 @@ class CreateMovieSerializer(serializers.ModelSerializer):
                 "genres"]
         
     def create(self, validated_data):
-        resp, _=CollectionMovies.objects.get_or_create(validated_data)
+        resp=CollectionMovies.objects.create(**validated_data)
         user=resp.collection.user
         if resp.genres:
             genres=resp.genres.split(",")
             for gen in genres:
                 obj, flag=Genres.objects.get_or_create(genre=gen, user=user)
-                if flag:
+                if flag==False:
                     obj.increase_count
         return MovieSerializer(resp, many=False).data

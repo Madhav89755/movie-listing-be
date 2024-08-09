@@ -15,7 +15,7 @@ class Genres(DateTime):
                            on_delete=models.CASCADE,
                            related_name="movies_genres")
     genre = models.CharField("Genres Title", max_length=256)
-    movie_count=models.BigIntegerField("Movie Count", default=0)
+    movie_count=models.BigIntegerField("Movie Count", default=1)
 
     def __str__(self) -> str:
         return f"{self.user.id} - {self.genre}"
@@ -33,4 +33,4 @@ class Genres(DateTime):
     class Meta:
         verbose_name = "Genre"
         verbose_name_plural = "Genres"
-        ordering=["-created_on"]
+        ordering=["-movie_count", "-created_on"]
