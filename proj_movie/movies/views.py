@@ -16,6 +16,12 @@ class UserRegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserRegistrationSerializer
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except Exception as e:
+            return Response({"error":str(e)}, status=HTTP_400_BAD_REQUEST)
 
 class GetMoviesAPI(APIView):
     def get(self, request):

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import CollectionMovies, Genres
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
@@ -35,3 +36,37 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         token_data=self.generate_token()
         access_token = token_data.get('access_token', {}).get("access") 
         return {"access_token":access_token}
+
+
+
+class MovieSerializer(serializers.ModelSerializer):
+    title=serializers.CharField(source="movie_title")
+    uuid=serializers.UUIDField(source="uuid_col")
+    class Meta:
+        model=CollectionMovies
+        fields=["uuid",
+                "title",
+                "description",
+                "genres"]
+
+
+class CreateMovieSerializer(serializers.ModelSerializer):
+    title=serializers.CharField(source="movie_title")
+    uuid=serializers.UUIDField(source="uuid_col")
+    class Meta:
+        model=CollectionMovies
+        fields=["uuid",
+                "collection",
+                "title",
+                "description",
+                "genres"]
+        
+    def create(self, validated_data):
+        resp, _=CollectionMovies.objects.get_or_create(validated_data)
+        user=resp.collection.user
+        if resp.genres:
+            genres=resp.genres.split(",")
+            for gen in genres:
+                obj, _=Genres.objects.get_or_create(genre=gen, user=user)
+                obj.increase_count
+        return MovieSerializer(resp, many=False).data

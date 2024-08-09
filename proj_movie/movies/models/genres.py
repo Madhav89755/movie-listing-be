@@ -19,13 +19,15 @@ class Genres(DateTime):
 
     def __str__(self) -> str:
         return f"{self.user.id} - {self.genre}"
-    
+
+    @property
     def increase_count(self):
-        self.movie_count+=1
+        self.movie_count=self.movie_count+1
         self.save()
 
+    @property
     def decrease_count(self):
-        self.movie_count-=1
+        self.movie_count=self.movie_count-1
         self.save()
 
     class Meta:
