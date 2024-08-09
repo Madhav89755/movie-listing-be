@@ -2,8 +2,7 @@ import requests
 import base64
 from django.conf import settings
 from utils.logging import unknown_exception_logger
-from utils.static_messages import (API_RETRY_MAX_LIMIT_REACHED,
-                                   API_REQUEST_FAILED)
+from utils.static_messages import API_RETRY_MAX_LIMIT_REACHED
 
 credentials = f'{settings.API_USERNAME}:{settings.API_PASSWORD}'
 encoded_credentials = base64.b64encode(
