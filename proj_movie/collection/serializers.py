@@ -1,17 +1,20 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from collection.models import Collection
-from movies.serializers import CreateMovieSerializer
+from movies.serializers import MovieSerializer, CreateMovieSerializer
 
 class CollectionSerializer(serializers.ModelSerializer):
     title=serializers.CharField(source="collection_title")
     description=serializers.CharField(max_length=None)
     uuid=serializers.UUIDField(source="id", read_only=True)
+    movies=MovieSerializer(source="collection_movies", many=True, read_only=True)
+
     class Meta:
         model=Collection
         fields=["uuid",
                 "title",
-                "description"]
+                "description",
+                "movies"]
 
 class CreateCollectionSerializer(serializers.ModelSerializer):
     title=serializers.CharField(source="collection_title", write_only=True)
