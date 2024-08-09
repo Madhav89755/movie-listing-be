@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
+    "drf_yasg",
 
     "collection",
     "movies",
@@ -170,3 +171,19 @@ SIMPLE_JWT = {
 API_URL=config("MOVIE_API_URL")
 API_USERNAME=config("MOVIE_API_USER_NAME")
 API_PASSWORD=config("MOVIE_API_PASSWORD")
+
+# Swagger Configurations
+SWAGGER_SETTINGS = {
+
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'LOGIN_URL': 'login/',
+    'DEFAULT_MODEL_DEPTH': -1,
+    'TAGS_SORTER':'alpha',
+    'OPERATIONS_SORTER':'alpha'
+}
