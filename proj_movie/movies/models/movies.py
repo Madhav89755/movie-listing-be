@@ -26,3 +26,4 @@ class CollectionMovies(DateTime):
         verbose_name = "Collection Movie"
         verbose_name_plural = "Collection Movies"
         ordering = ["-created_on"]
+        unique_together =("uuid_col", "collection")

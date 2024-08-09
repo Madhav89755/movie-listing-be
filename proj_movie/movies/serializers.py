@@ -67,6 +67,7 @@ class CreateMovieSerializer(serializers.ModelSerializer):
         if resp.genres:
             genres=resp.genres.split(",")
             for gen in genres:
-                obj, _=Genres.objects.get_or_create(genre=gen, user=user)
-                obj.increase_count
+                obj, flag=Genres.objects.get_or_create(genre=gen, user=user)
+                if flag:
+                    obj.increase_count
         return MovieSerializer(resp, many=False).data

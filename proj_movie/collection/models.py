@@ -25,3 +25,4 @@ class Collection(DateTime):
         verbose_name = "Collection"
         verbose_name_plural = "Collection"
         ordering = ["-created_on"]
+        unique_together=("user", "collection_title")

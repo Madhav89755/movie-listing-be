@@ -15,6 +15,7 @@ class CreateCollectionSerializer(serializers.ModelSerializer):
                 "user",
                 "description",
                 "movies"]
+        extra_kwargs = {'user': {'write_only': True}}
 
     def create(self, validated_data):
         movies_data=validated_data.pop('movies', [])
