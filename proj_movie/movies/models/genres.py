@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from utils.abstract.models import DateTime
@@ -5,6 +6,10 @@ from utils.abstract.models import DateTime
 
 
 class Genres(DateTime):
+    id=models.UUIDField("ID",
+                        default=uuid.uuid4,
+                        primary_key=True,
+                        editable=False)
     user=models.ForeignKey(User,
                            verbose_name="User",
                            on_delete=models.CASCADE,

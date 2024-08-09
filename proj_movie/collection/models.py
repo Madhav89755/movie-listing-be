@@ -6,6 +6,10 @@ from utils.abstract.models import DateTime
 
 
 class Collection(DateTime):
+    id=models.UUIDField("ID",
+                        default=uuid.uuid4,
+                        primary_key=True,
+                        editable=False)
     user = models.ForeignKey(User,
                              verbose_name="User",
                              on_delete=models.CASCADE,

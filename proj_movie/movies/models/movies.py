@@ -5,7 +5,7 @@ from utils.abstract.models import DateTime
 
 
 class CollectionMovies(DateTime):
-    id = models.UUIDField("uuid",
+    id = models.UUIDField("id",
                           default=uuid.uuid4,
                           primary_key=True)
     collection = models.ForeignKey("collection.Collection",
