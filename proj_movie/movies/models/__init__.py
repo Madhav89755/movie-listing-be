@@ -1,2 +1,2 @@
-from .movies import CollectionMovies
 from .genres import Genres
+from .movies import CollectionMovies

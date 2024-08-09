@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "corsheaders",
 
     "collection",
-    "movies"
+    "movies",
+    "user_requests"
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "user_requests.middleware.RequestCountMiddleware"
 ]
 
 REST_FRAMEWORK = {
